@@ -2,8 +2,11 @@ ConcurrencyControlInJava
 ========================
 NAME : DEEPAK RAVISHANKAR RAMKUMAR
 EMAIL: dramkuma@buffalo.edu
+
 DESIGN DOCUMENT
+
 FINE GRAIN LOCKING:
+
 Algorithm Used:
  The locking protocol acquires a lock on elements in the order of previous, current and next in order to avoid deadlock.
  Each element in the list has a lock associated with it. Hence a lock on the element protects its value, next and previous fields.
@@ -13,6 +16,7 @@ How are Deadlocks avoided?
 How are race conditions prevented?
  A check on the previous element is made in the insertBefore method once the locks on the previous and current elements have been acquired. This is done to make sure that no other thread has modified the previous element.
  Once we have locked each element with the help of the above mentioned locking protocol there cannot be any data races. I have used synchronized statements to lock my elements and thus avoid data races.
+
 READ/WRITE LOCKS:
  The objects requesting the reader lock is allowed to acquire it when there are no pending writers or write requests. Multiple objects can acquire the same reader lock and read concurrently inside the lockRead() method. If some other object holds a write lock on the same element then current object is made to wait until it is released by that object.
  Once the objects have finished reading they can release the reader lock and notify all the other threads inside the unlockRead() method.
